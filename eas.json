@@ -12,9 +12,7 @@
       "distribution": "internal"
     },
     "production": {
-      "autoIncrement": true,
-      "env": {},
-      "prebuildCommand": "npx expo prebuild --clean && node fix-rntp.js"
+      "autoIncrement": true
     }
   },
   "submit": {
