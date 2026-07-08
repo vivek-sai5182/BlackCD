@@ -1,18 +1,13 @@
 {
   "expo": {
-    "name": "musicFirst",
-    "slug": "musicFirst",
-    "scheme": "musicFirst",
+    "name": "BlackCD",
+    "slug": "BlackCD",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "scheme": "blackcd",
+    "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "supportsTablet": true
     },
@@ -22,19 +17,36 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.viveksai731.musicFirst"
+      "predictiveBackGestureEnabled": false,
+      "package": "com.viveksai731.BlackCD"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "output": "static",
+      "favicon": "./assets/icon.png"
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
+        }
+      ]
     ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "522055a4-9c9d-4047-8703-d79b0089e88a"
+        "projectId": "3b3faa4c-f23d-4b36-950b-9a8ad01dc10a"
       }
     }
   }
