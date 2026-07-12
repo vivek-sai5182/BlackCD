@@ -37,8 +37,7 @@
             "backgroundColor": "#000000"
           }
         }
-      ],
-      "./plugins/fix-rntp"
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

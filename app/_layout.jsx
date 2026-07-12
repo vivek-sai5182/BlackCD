@@ -1,7 +1,7 @@
-import { Stack } from 'expo-router';
-import { AudioProvider } from './context/AudioContext';
-import TrackPlayer from 'react-native-track-player';
-import service from './service';
+import TrackPlayer from "@javascriptcommon/react-native-track-player";
+import { Stack } from "expo-router";
+import { AudioProvider } from "./context/AudioContext";
+import service from "./service";
 TrackPlayer.registerPlaybackService(() => service);
 const RootLayout = () => {
   return (

@@ -1,14 +1,14 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import TrackPlayer, { 
-  Event, 
+import TrackPlayer, {
+  Capability,
+  Event,
   State,
-  useTrackPlayerEvents,
   useProgress,
-  Capability
-} from 'react-native-track-player';
-import { addToRecentlyPlayed } from '../apis/storage';
-import { getUrl } from '../apis/ytsapi';
-import { isCached, saveToCache } from '../apis/cacher';
+  useTrackPlayerEvents,
+} from "@javascriptcommon/react-native-track-player";
+import { createContext, useContext, useEffect, useState } from "react";
+import { isCached, saveToCache } from "../apis/cacher";
+import { addToRecentlyPlayed } from "../apis/storage";
+import { getUrl } from "../apis/ytsapi";
 
 const AudioContext = createContext(null);
 
@@ -79,11 +79,11 @@ export function AudioProvider({ children }) {
       let audioUri = await isCached(song.vid);
 
       if (audioUri) {
-        console.log('Playing from cache:', song.vid);
+        console.log("Playing from cache:", song.vid);
       } else {
         const result = await getUrl(song.vid);
         if (!result) {
-          console.log('No URL found');
+          console.log("No URL found");
           setIsLoading(false);
           return;
         }
@@ -92,7 +92,7 @@ export function AudioProvider({ children }) {
 
         // Cache in background
         saveToCache(song.vid, audioUri).then(() => {
-          console.log('Background cache done:', song.vid);
+          console.log("Background cache done:", song.vid);
         });
       }
 
@@ -102,7 +102,7 @@ export function AudioProvider({ children }) {
         id: song.vid,
         url: audioUri,
         title: song.name,
-        artist: '',
+        artist: "",
         artwork: song.thumbnail,
       });
       await TrackPlayer.play();
@@ -115,9 +115,8 @@ export function AudioProvider({ children }) {
         title: song.name,
         thumbnail: song.thumbnail,
       });
-
     } catch (e) {
-      console.log('playSong error:', e.message);
+      console.log("playSong error:", e.message);
       setIsLoading(false);
     }
   }
@@ -142,7 +141,7 @@ export function AudioProvider({ children }) {
     await playSong(
       { vid: next.videoId, name: next.title, thumbnail: next.thumbnail },
       queue,
-      nextIndex
+      nextIndex,
     );
   }
 
@@ -154,25 +153,27 @@ export function AudioProvider({ children }) {
     await playSong(
       { vid: prev.videoId, name: prev.title, thumbnail: prev.thumbnail },
       queue,
-      prevIndex
+      prevIndex,
     );
   }
 
   return (
-    <AudioContext.Provider value={{
-      currentSong,
-      isPlaying,
-      isLoading,
-      position: progress.position * 1000, // convert to ms
-      duration: progress.duration * 1000, // convert to ms
-      queue,
-      queueIndex,
-      playSong,
-      togglePlayPause,
-      seekTo,
-      playNext,
-      playPrev,
-    }}>
+    <AudioContext.Provider
+      value={{
+        currentSong,
+        isPlaying,
+        isLoading,
+        position: progress.position * 1000, // convert to ms
+        duration: progress.duration * 1000, // convert to ms
+        queue,
+        queueIndex,
+        playSong,
+        togglePlayPause,
+        seekTo,
+        playNext,
+        playPrev,
+      }}
+    >
       {children}
     </AudioContext.Provider>
   );
